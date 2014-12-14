@@ -42,3 +42,5 @@ A new wing creation process is an eight step process that starts with defining y
 8.	Define Report filtering criteria
 
 Figure 1 blow is the flow diagram representing the steps needed to create a new Wing in MONAHRQ using the open source framework. This once created, you will be able to import your XML file to create a new data Wing in MONAHRQ for the Host Users to use it for data import and reporting. A sample Wing XML file is defined in Appendix A.
+
+
