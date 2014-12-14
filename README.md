@@ -32,12 +32,12 @@ Your new wing will be defined by creating an XML file. This file will contain al
 
 #### Wing Creation Work Flow
 A new wing creation process is an eight step process that starts with defining your Wing attributes and ends with defining the reports for the type of data that will be imported by the Host User using this Wing. These steps include:
-1.	Defining Wing Attributes
-2.	Defining Target table structure
-3.	Defining Steps included in the import process
-4.	Defining Measures associated with the Wing
-5.	Defining Topic and Subtopic for Measures
-6.	Defining Reports associated with the Wing
+* 1.	Defining Wing Attributes
+* 2.	Defining Target table structure
+* 3.	Defining Steps included in the import process
+* 4.	Defining Measures associated with the Wing
+* 5.	Defining Topic and Subtopic for Measures
+* 6.	Defining Reports associated with the Wing
 7.	Associate Report Columns with Measures
 8.	Define Report filtering criteria
 
