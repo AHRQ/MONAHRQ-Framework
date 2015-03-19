@@ -1,1 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Target Name="New Wing"
+        DbSchemaName="Targets_NewWing" Description="New Wing Description"
+        IsReferenceTarget="false" AllowMultipleImports="true"
+        DisplayOrder="15" Version="1.0.0" IsDisabled="false"
+        Publisher="MONAHRQ Developer, Inc."
+        PublisherEmail="support@monahrqdeveloper.com"
+        PublisherWebsite="http://www.monahrqdeveloper.com">
+  <Columns>
+    <Column Name="CountyFIPS" DataType="String"
+            Description="County FIPS" IsRequired="true"  /> 
+    <Column Name="NumberOfDischarges" DataType="Int32"
+            Description="Number Of Discharges" IsRequired="true" />
+    <Column Name="LOS" DataType="Int32"
+            Description="Length Of Stay" IsRequired="true" />
+    <Column Name="MeanCost" DataType="Decimal"
+            Description="Mean Cost" IsRequired="false" />
+    <Column Name="PointOfOrigin" DataType="Int32"
+            Description="Point Of Origin" Scope="PointOfOrigin" />
+    <Column Name="Payer" DataType="Int32"
+            Description="Primary Payer" Scope="PrimaryPayer" />
+  </Columns>
+  <ImportSteps Type="Simple" />
+  <Measures>
+    <Measure
+         Name="My Measure" MeasureType="MyMeasureType" Source=""
+         NQFEndorsed="true" NQFID="12345" HigherScoresAreBetter="true"
+         UpperBound="1000" LowerBound="0"
+         SuppressionDenominator="0" SuppressionNumerator="0"
+         PerformMarginSuppression="false"
+         ScaleBy="1000" ScaleTarget="Provider"
+         RiskAdjustedMethod="obsv" RateLabel="Per Birth"
+         NationalBenchmark="25" IsExistingmeasure="false"
+         MeasureCode="MyMeasure-01">
+      <MeasureTitle Selected="Plain">
+        <Plain>This is the plain title</Plain>
+        <Clinical>This is the clinincal title</Clinical>
+      </MeasureTitle>
+      <StatePeerBenchmark CalculationMethod="Calculated_Mean" ProvidedBenchmark="1.2345" />
+      <Description>
+        This is a long description of the measure.
+      </Description>
+      <Footnotes>Footnotes go here</Footnotes>
+      <Topics>
+        <Topic Name="General Topic 1">
+          <SubTopics>
+            <SubTopic Name="Genral SubStopic 1" />
+            <SubTopic Name="Genral SubStopic 2" />
+          </SubTopics>
+        </Topic>
+        <Topic Name="General Topic 2">
+          <SubTopics>
+            <SubTopic Name="Genral SubStopic 3" />
+            <SubTopic Name="Genral SubStopic 4" />
+          </SubTopics>
+        </Topic>
+      </Topics>
+    </Measure>
+  </Measures>
+  <Reports>
+    <ReportManifest Name="Report name" PreviewImage="MyImage.png"
+              Category="Quality" RequiresCmsProviderId="true"
+              RequiresCostToChargeRatio="false"
+              ShowInterpretationText="false">
+      <Audiences>
+        <Audience AudienceType="AllAudiences" />
+        <Audience AudienceType="Consumers" />
+      </Audiences>
+      <Datasets>
+        <Dataset Name="New Wing"/> <!-- Match above or one of the ones in Monahrq -->
+      </Datasets>
+      <Columns>
+        <Column IsMeasure="true" MeasureCode="ED 01"/>
+        <Column Name="Number Admitted to Hospital Following ED Visit" MeasureCode="NM 01"/>
+        <Column Name="Number of Deaths During ED Visit" MeasureCode="NM 02"/>
+        <Column Name="Number of Deaths Post-Admission Following ED Visit" MeasureCode="NM 03"/>
+      </Columns>
+      <Filters>
+        <Filter Type="Hospital">
+          <Values>
+            <FilterValue Name="Hospital Name" />
+            <FilterValue Name="Hospital Type" />
+            <FilterValue Name="Hospital Geolocation" />
+          </Values>
+        </Filter>
+        <Filter Type="Display">
+          <Values>
+            <FilterValue Name="Hospital Name" />
+            <FilterValue Name="Hospital Type" />
+            <FilterValue Name="Hospital Geolocation" />
+          </Values>
+        </Filter>
+      </Filters>
+      <Description>
+        This is a description for the report.
+      </Description>
+      <InterpretationText>
+        This is the text that tells how to interpret the results.
+      </InterpretationText>
+    </ReportManifest>
+  </Reports>
+</Target>
+
 
