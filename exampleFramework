@@ -8,7 +8,7 @@
         PublisherWebsite="http://www.monahrqdeveloper.com">
   <Columns>
     <Column Name="CountyFIPS" DataType="String"
-            Description="County FIPS" IsRequired="true"  />
+            Description="County FIPS" IsRequired="true"  /> 
     <Column Name="NumberOfDischarges" DataType="Int32"
             Description="Number Of Discharges" IsRequired="true" />
     <Column Name="LOS" DataType="Int32"
