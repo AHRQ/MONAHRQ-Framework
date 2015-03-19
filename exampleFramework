@@ -2,7 +2,7 @@
 <Target Name="New Wing"
         DbSchemaName="Targets_NewWing" Description="New Wing Description"
         IsReferenceTarget="false" AllowMultipleImports="true"
-        DisplayOrder="15" Version="1.0.0" IsDisabled="false"
+        DisplayOrder="15" Version="1.0.0" IsDisabled="false" 
         Publisher="MONAHRQ Developer, Inc."
         PublisherEmail="support@monahrqdeveloper.com"
         PublisherWebsite="http://www.monahrqdeveloper.com">
