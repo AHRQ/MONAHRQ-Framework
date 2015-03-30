@@ -1,7 +1,11 @@
 MONAHRQ-Framework
 =================
 
-The highly dynamic environment driven by the Affordable Care Act provides an opportunity for MONAHRQ to become a software tool that drives innovation and collaborative development. With its new software architecture, MONAHRQ can be leveraged to accelerate the adoption of quality reporting solutions for internal quality improvement and public reporting. 
+The highly dynamic health care environment driven by the Affordable Care Act and other changes in federal law provides an opportunity for MONAHRQ to become a software tool that significantly expands transparency while driving innovation and collaborative development. The new architecture of MONAHRQ can be leveraged to accelerate the adoption of the software as a quality reporting solution for internal quality improvement and public reporting. 
+
+With the redesign of MONAHRQ architecture in MONAHRQ 6.0, it is possible to add new data sources, reporting options, and website customization capabilities using the Open Framework. This enables the open source developer community to plug-in additional data sets and measures, and create new report types. This Framework adds extensibility to the MONAHRQ application.
+
+As with most software, the expanded Framework functionality is a first step in enabling innovation and greater flexibility for Host Users. For this initial version, Host Users who have experience with software development or basic programming skills should be able to apply the information described below to add new datasets and create new report types for their MONAHRQ-generated website. At the same time, Host Users who are not familiar with programming and related technical issues are encouraged to team with an IT professional or developer who can assist them with using the Framework included with MONAHRQ 6.0. 
 
 ### What is MOANHRQ Open Source Framework?
 MONAHRQ Open Source Framework allows the Developers to add a new dataset type, define measures, report types, and customize the report layout in MONAHRQ generated website. The Open Source Framework is divided into two main components:
