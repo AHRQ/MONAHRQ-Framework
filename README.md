@@ -7,22 +7,23 @@ With the redesign of MONAHRQ architecture in MONAHRQ 6.0, it is possible to add 
 
 As with most software, the expanded Framework functionality is a first step in enabling innovation and greater flexibility for Host Users. For this initial version, Host Users who have experience with software development or basic programming skills should be able to apply the information described below to add new datasets and create new report types for their MONAHRQ-generated website. At the same time, Host Users who are not familiar with programming and related technical issues are encouraged to team with an IT professional or developer who can assist them with using the Framework included with MONAHRQ 6.0. 
 
-### What is MOANHRQ Open Source Framework?
-MONAHRQ Open Source Framework allows the Developers to add a new dataset type, define measures, report types, and customize the report layout in MONAHRQ generated website. The Open Source Framework is divided into two main components:
+### What is MONAHRQ Open Source Framework?
+The Framework allows you to add one or more new dataset types, define measures and report types, and customize report layouts in their MONAHRQ-generated websites. The Framework is divided into two main framework components, Wings and Flutters, explained below.
 
-#### Wing Framework
-A “Wing” framework is defined as a pluggable interface for MONAHRQ application that is capable of importing a data file to MONAHRQ. There are several types of Wings utilized by MONAHRQ. Each Wing can handle a discrete dataset type. Several Wings can be utilized throughout the process of preparing and publishing a website. In version 1.0 of Open Source Framework for Wing, the Developers can add a datasets like, Medicare Provider charge, Inpatient Discharge, Emergency Department Treat-and-Release, and AHRQ QI indicator output by defining it in an XML file.   
-Wings are comprised of a XML formatted manifest. The Developers will be able to register a Wing (XML file) to the MONAHRQ application to automatically launch. Once plugged to MONAHRQ, Host User can use the Wing to import data files. 
-Wings can be imported by utilizing the “Import Wing” option under the application settings section. During the import, the files will be copied to the appropriate directories and any required registration (database table creation, etc.) is completed during this process.
+#### Wings
+A “Wing” is defined as a modular interface for the MONAHRQ software that enables Host Users to import new data files into MONAHRQ. There are several types of Wings used by MONAHRQ. Each Wing can handle a discrete dataset type. Several Wings can be used throughout the process of preparing and publishing a MONAHRQ-generated website. In version 1.0 of the Framework, you can add datasets similar to the existing datasets, such as, Medicare Provider Charges, Inpatient Discharge, Emergency Department Treat-and-Release, and AHRQ Quality Indicators (QIs). This is done by defining the Wing in an XML file.   
+Wings are comprised of an XML formatted manifest file, which contains the instructions and configuration details of the Wing. You will be able to import a Wing into the MONAHRQ software. Once the Wing is imported into MONAHRQ, the Host User can use it to import the new data files. 
+Wings can be imported by using the “Import Wing” option in the MONAHRQ software settings section. During the import, the files will be copied to the appropriate directories and any required structural changes (database table creation) will be completed during this process.
 
-#### Flutters Framework
+#### Flutters
 
-A “Flutter” framework lets the Developers author reports layout, style and flow by utilizing the components of the AngularJS framework upon which MONAHRQ generated website is developed. Developing a flutter from scratch is largely an exercise in AngularJS development. The developer would author the necessary controllers, services, views, and styling to build the reports. 
+A “Flutter” lets you create new report layouts, style and flow. This process uses the components of the AngularJS framework, which is the same framework used in all MONAHRQ-generated websites. Developing a Flutter from scratch is largely an exercise in AngularJS development (https://angularjs.org/), an increasingly common process using the open source web framework developed by Google. Developers who create Flutters will be authoring the necessary controllers, services, views, and styling to build the reports. 
 
-A set of module rules and configuration is available for the Open Source Framework Developers to ensure that a flutters can be plugged into a MONHARQ generated website for a compatible dataset. 
-In a simple scenario, a Developer will be able to utilize an existing out-of-the-box generic “tabular report” Flutter by copying the existing Flutter and integrating it with a new report. This is done by specifying within the flutter’s configuration the report’s unique name, data file(s), how a data file’s fields map to table columns, and the table’s column model (for example: titles, data types, and sorting rules). The underlying JavaScript code doesn’t need to be customized in this scenario. In a more complex scenario, the underlying JavaScript can be modified to achieve the desired results.
+A set of module rules and configuration guidelines is available for Framework developers to use to ensure that a new report format, or Flutter, can be plugged into a MONHARQ generated website for use with a compatible dataset produced by a Wing. 
 
-The sections below explains the “Wings” and “Flutter” creation process in simple steps.
+In a simple scenario, you will be able to use an existing generic “tabular report” format that is already part of MONAHRQ by copying the existing report template and transforming it into a new report, or Flutter. This is done by specifying within the Flutter’s configuration the report’s unique name, data file(s), how a data file’s fields map to table columns, and the table’s column model (e.g.: titles, data formatting, and sorting rules). In this scenario, the underlying JavaScript code doesn’t need to be customized. In a more complex scenario, the underlying JavaScript can be modified to achieve the developer’s desired results.
+
+
 
 ### Creating a New Wing
 Your new wing will be defined by creating an XML file. This file will contain all of the information needed to define your Wing, the target table that will hold the data uploaded by the Host User, the import steps for uploading the data, measures and their definition that will be associated with the dataset, and the associated reports. We suggest you use an XML editor and associate the XML Schema (WingTemplateXmx.xsd) for intellisense when creating your wing. At a high level, your new wing will look like this:
