@@ -1,3 +1,6 @@
+-----------------------------------------------------------------------------------------------------
+On April 8th, a GitHub community will be publicly announced that will serve as a platform for dissemination and knowledge-sharing for the open source framework. The sample code to use the framrowk will be added shortly. 
+----------------------------------------------------------------------------------------------------
 MONAHRQ-Framework
 =================
 
