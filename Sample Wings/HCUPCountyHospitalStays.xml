@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Target Name="HCUP County Hospital Stays Data" 
+		DbSchemaName="Targets_HCUPCountyHospitalStays" DisplayOrder="14" AllowMultipleImports="true"  Version="1.0.0" 
+		Publisher="Pantheon, Inc." PublisherEmail="monahrq-support@panth.com">
+  <Columns>
+    <Column Name="county_fips" DataType="String" Description="The County FIPS" IsRequired="true"  />
+	<Column Name="local_hospital_Id" DataType="String" Description="The Local Hospital Id" IsRequired="true"  />
+    <Column Name="state" DataType="String" Description="State" IsRequired="true" />
+    <Column Name="total_number_of_discharges" DataType="Decimal" Scale="7" Description="Total Number Of Discharges" IsRequired="false" />
+    <Column Name="discharge_rate_100k_population" DataType="Decimal" Scale="5" Description="Rate of discharges per 100,000 population" IsRequired="false" />
+    <Column Name="mean_los" DataType="Decimal" Scale="9" Description="Mean length of stay, days" IsRequired="false" />
+    <Column Name="numb_of_days_in_hospital" DataType="Decimal" Scale="4" Description="Aggregate number of days in the hospital" IsRequired="false" />
+    <Column Name="numb_inpatient_days_100K_population" DataType="Decimal" Scale="5" Description="Number of inpatient days per 100,000 population" IsRequired="false" />
+    <Column Name="mean_cost_stay" DataType="Decimal" Scale="5" Description="Mean cost per stay" IsRequired="false" />
+    <Column Name="agg_costs_all_hosp_stays" DataType="Decimal" Scale="5" Description="Aggregate costs for all hospital stays" IsRequired="false" />
+    <Column Name="costs_inpatient_stays_per_capita" DataType="Decimal" Scale="1" Description="Costs for inpatient stays per capita" IsRequired="false" />
+  </Columns>
+  <ImportSteps Type="Simple" />
+  <Measures>
+    <Measure
+         Name="HCUP 01"
+         MeasureType="HCUP"
+         Source="" HigherScoresAreBetter="true"
+         RiskAdjustedMethod="obsv"
+         ScaleTarget="Provider" ScaleBy="1"
+         PerformMarginSuppression="false"
+         SuppressionDenominator="0" SuppressionNumerator="0">
+      <MeasureTitle Selected="Plain">
+        <Plain>Sample Plain Title Text for HCUP 01</Plain>
+        <Clinical>Sample Clinical Title Text for HCUP 01</Clinical>
+      </MeasureTitle>
+      <StatePeerBenchmark CalculationMethod="Calculated_Mean" ProvidedBenchmark="0.15432" />
+      <Description>
+        This is the description for sample measure HCUP 01.
+      </Description>
+      <Footnotes>This is a sample footnote.</Footnotes>
+      <Topics>
+        <Topic Name="General Topic 1" Type="Hospital">
+          <SubTopics>
+            <SubTopic Name="General Subtopic 1" />
+            <SubTopic Name="General Subtopic 2" />
+          </SubTopics>
+        </Topic>
+        <Topic Name="General Topic 2" Type="Hospital">
+          <SubTopics>
+            <SubTopic Name="General Subtopic 3" />
+            <SubTopic Name="General Subtopic 4" />
+          </SubTopics>
+        </Topic>
+      </Topics>
+    </Measure>
+	<Measure
+         Name="HCUP 02"
+         MeasureType="HCUP"
+         Source="" HigherScoresAreBetter="true"
+         RiskAdjustedMethod="obsv"
+         ScaleTarget="Provider" ScaleBy="1"
+         PerformMarginSuppression="false"
+         SuppressionDenominator="0" SuppressionNumerator="0">
+      <MeasureTitle Selected="Plain">
+        <Plain>Sample Plain Title Text for HCUP 02</Plain>
+        <Clinical>Sample Clinical Title Text for HCUP 02</Clinical>
+      </MeasureTitle>
+      <StatePeerBenchmark CalculationMethod="Calculated_Mean" ProvidedBenchmark="0.15432" />
+      <Description>
+        This is the description for sample measure HCUP 02.
+      </Description>
+      <Footnotes>This is a sample footnote.</Footnotes>
+      <Topics>
+        <Topic Name="General Topic 1" Type="Hospital">
+          <SubTopics>
+            <SubTopic Name="General Subtopic 1" />
+            <SubTopic Name="General Subtopic 2" />
+          </SubTopics>
+        </Topic>
+        <Topic Name="General Topic 2" Type="Hospital">
+          <SubTopics>
+            <SubTopic Name="General Subtopic 3" />
+            <SubTopic Name="General Subtopic 4" />
+          </SubTopics>
+        </Topic>
+      </Topics>
+    </Measure>
+  </Measures>
+  <Reports>
+    <ReportManifest Name="HCUP County Hospital Stays Summary Report" Version="1.0.0" 
+                    OutputJsNamespace="$.monahrq.flutters.hcupcountyhospitalstaysdata.report.summary" OutputFileName="summary.js"
+                    Category="Utilization">
+      <Audiences>
+        <Audience AudienceType="AllAudiences" />
+        <Audience AudienceType="Consumers" />
+      </Audiences>
+      <Datasets>
+        <Dataset Name="HCUP County Hospital Stays Data"/>
+      </Datasets>
+      <Filters/>
+      <ReportAttributes/>
+      <Columns>
+        <Column Name="Name"/>
+        <Column Name="Total number of discharges"/>
+        <Column Name="Rate of discharges per 100,000 population"/>
+        <Column Name="Mean length of stay, days"/>
+        <Column Name="Aggregate number of days in the hospital"/>
+        <Column Name="Number of inpatient days per 100,000 population"/>
+        <Column Name="Mean cost per stay"/>
+        <Column Name="Aggregate costs for all hospital stays"/>
+        <Column Name="Costs for inpatient stays per capita"/>
+      </Columns>
+      <ReportOutputSQL>
+        <![CDATA[
+;with COUNTIES_CTE (county_fips, county_name, [total_number_of_discharges], [discharge_rate_100k_population],
+           [mean_los],[numb_of_days_in_hospital], [numb_inpatient_days_100K_population], 
+           [mean_cost_stay], [agg_costs_all_hosp_stays], [costs_inpatient_stays_per_capita], 
+           [state]) as
+(
+	SELECT DISTINCT
+		   chs.[county_fips], c.[Name] 'county_name', chs.[total_number_of_discharges], chs.[discharge_rate_100k_population],
+		   chs.[mean_los],chs.[numb_of_days_in_hospital], chs.[numb_inpatient_days_100K_population], 
+		   chs.[mean_cost_stay], chs.[agg_costs_all_hosp_stays], chs.[costs_inpatient_stays_per_capita], 
+		   chs.[state]
+	FROM [dbo].[Targets_HCUPCountyHospitalStays]  chs
+	INNER JOIN [dbo].[Base_Counties] c ON c.[CountyFIPS] = chs.[county_fips]
+	WHERE chs.[state] IN ([@@REPORTING_STATES@@]) AND chs.[Dataset_id]=[@@DATASET_ID@@]
+)
+SELECT DISTINCT 
+	   -1 'county_fips', ('State Total') 'county_name', Sum(chs.[total_number_of_discharges]) 'total_number_of_discharges', AVG(chs.[discharge_rate_100k_population]) 'discharge_rate_100k_population',
+	   AVG(chs.[mean_los]) 'mean_los',SUM(chs.[numb_of_days_in_hospital]) 'numb_of_days_in_hospital', SUM(chs.[numb_inpatient_days_100K_population]) 'numb_inpatient_days_100K_population', 
+	   AVG(chs.[mean_cost_stay]) 'mean_cost_stay', SUM(chs.[agg_costs_all_hosp_stays]) 'agg_costs_all_hosp_stays', SUM(chs.[costs_inpatient_stays_per_capita]) 'costs_inpatient_stays_per_capita', 
+	   chs.[state]
+FROM [dbo].[Targets_HCUPCountyHospitalStays] chs
+WHERE chs.[state] IN ([@@REPORTING_STATES@@]) AND chs.[Dataset_id]=[@@DATASET_ID@@]
+GROUP BY chs.[state]
+
+UNION
+ 
+SELECT DISTINCT
+	   cCTE.[county_fips], 
+	   --cCTE.[county_name], 
+	   ('<a data-ui-sref="top.flutters.HCUPDetailsFlutter({reportId: ''gov.ahrq.Reports.HCUP2'', filter:''county_fips=' + cCTE.[county_fips] + '''})">' + cCTE.[county_name] + '</a>') 'county_name',
+	   Sum(cCTE.[total_number_of_discharges]) 'total_number_of_discharges', AVG(cCTE.[discharge_rate_100k_population]) 'discharge_rate_100k_population',
+	   AVG(cCTE.[mean_los]) 'mean_los',SUM(cCTE.[numb_of_days_in_hospital]) 'numb_of_days_in_hospital', SUM(cCTE.[numb_inpatient_days_100K_population]) 'numb_inpatient_days_100K_population', 
+	   AVG(cCTE.[mean_cost_stay]) 'mean_cost_stay', SUM(cCTE.[agg_costs_all_hosp_stays]) 'agg_costs_all_hosp_stays', SUM(cCTE.[costs_inpatient_stays_per_capita]) 'costs_inpatient_stays_per_capita', 
+	   cCTE.[state]
+ FROM COUNTIES_CTE cCTE
+ GROUP BY cCTE.[county_fips], cCTE.[county_name], cCTE.[state]
+        ]]>
+      </ReportOutputSQL>
+    </ReportManifest>
+    <ReportManifest Name="HCUP County Hospital Stays Detail Report" Category="Utilization" 
+				    OutputJsNamespace="$.monahrq.flutters.hcupcountyhospitalstaysdata.report.details" OutputFileName="details.js" Version="1.0.0">
+      <Audiences>
+        <Audience AudienceType="AllAudiences" />
+        <Audience AudienceType="Consumers" />
+      </Audiences>
+      <Datasets>
+        <Dataset Name="HCUP County Hospital Stays Data"/>
+      </Datasets>
+      <Filters/>
+      <ReportAttributes/>
+      <Columns>
+        <Column Name="Name"/>
+        <Column Name="Total number of discharges"/>
+        <Column Name="Rate of discharges per 100,000 population"/>
+        <Column Name="Mean length of stay, days"/>
+        <Column Name="Aggregate number of days in the hospital"/>
+        <Column Name="Number of inpatient days per 100,000 population"/>
+        <Column Name="Mean cost per stay"/>
+        <Column Name="Aggregate costs for all hospital stays"/>
+        <Column Name="Costs for inpatient stays per capita"/>
+      </Columns>
+      <ReportOutputSQL>
+        <![CDATA[
+          SELECT DISTINCT
+             h.[Id] 'hospital_id', h.[Name] 'hospital_name', chs.[state], chs.[county_fips],
+		     chs.[total_number_of_discharges], chs.[discharge_rate_100k_population], 
+             chs.[mean_los], chs.[numb_of_days_in_hospital], chs.[numb_inpatient_days_100K_population], 
+             chs.[mean_cost_stay], cast(chs.[agg_costs_all_hosp_stays] as numeric(32,2)) 'agg_costs_all_hosp_stays', chs.[costs_inpatient_stays_per_capita],
+             ('<a href="#" data-ui-sref="top.quality-ratings.profile({id: ' + cast(h.[Id] as nvarchar(20)) + '})">' + h.[Name] + '</a>') 'profile_lnk'
+          FROM [dbo].[Targets_HCUPCountyHospitalStays]  chs
+               INNER JOIN [dbo].[Base_Counties] c ON c.[CountyFIPS] = chs.[county_fips]
+	           INNER JOIN [dbo].[Hospitals] h ON h.[LocalHospitalId] = chs.[local_hospital_id]
+          WHERE chs.[state] IN ([@@REPORTING_STATES@@]) AND chs.[Dataset_id]=[@@DATASET_ID@@]
+          GROUP BY h.[Id]
+			     , h.[Name]
+                 , chs.[state]
+	             , chs.[county_fips]
+                 , chs.[total_number_of_discharges]
+                 , chs.[discharge_rate_100k_population]
+                 , chs.[mean_los]
+                 , chs.[numb_of_days_in_hospital]
+                 , chs.[numb_inpatient_days_100K_population]
+                 , chs.[mean_cost_stay]
+                 , chs.[agg_costs_all_hosp_stays]
+                 , chs.[costs_inpatient_stays_per_capita]; 
+        ]]>
+      </ReportOutputSQL>
+    </ReportManifest>
+  </Reports>
+</Target>
