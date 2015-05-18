@@ -1,6 +1,3 @@
------------------------------------------------------------------------------------------------------
-In the coming weeks, a GitHub community will be publicly announced that will serve as a platform for dissemination and knowledge-sharing for the open source framework, and a link to the GitHub community will be placed on this webpage once it is ready.
-----------------------------------------------------------------------------------------------------
 MONAHRQ-Framework
 =================
 
